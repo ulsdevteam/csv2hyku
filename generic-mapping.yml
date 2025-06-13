@@ -1,0 +1,33 @@
+Title:
+  name: 'title'
+Creator:
+  name: 'creator'
+Keywords:
+  name: 'keyword'
+  separator: ','
+  transform: 'strip'
+Abstract:
+  name: 'abstract'
+Date:
+  name: 'date'
+Visibility:
+  name: 'visiblity'
+Eembargo Release Date:
+  name: 'embargo_release_date'
+Visibility During Embargo:
+  name: 'visibility_during_embargo'
+Visibility After Embargo:
+  name: 'visibility_after_embargo'
+Subject:
+  name: 'subject'
+Collection (GUID):
+  name: 'member_of_collection_ids'
+Committee Members:
+  name: 'committee'
+  separator: ';'
+  transform: 'strip'
+Language:
+  name: 'language'
+Filename:
+  name: 'file'
+  transform: 'file'
