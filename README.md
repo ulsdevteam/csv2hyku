@@ -57,6 +57,31 @@ For a CSV column with the first row header of "Keywords", and the cell value of 
   <keyword>Collard Greens</keyword>
 ```
 
+#### `name` values can be repeated
+
+YAML snippet:
+```
+Keywords:
+  name: keyword
+  separator: ','
+  transform: 'strip'
+keyword 1:
+  name: keyword
+keyword 2:
+  name: keyword
+keyword 3:
+  name: keyword
+```
+
+If the prior example also had column headers of "keyword 1" and "keyword 2", with respective values of "Peas", and "Carrots", the XML metadta snippet will be:
+```
+  <keyword>Broccoli</keyword>
+  <keyword>Cauliflower</keyword>
+  <keyword>Collard Greens</keyword>
+  <keyword>Peas</keyword>
+  <keyword>Carrots</keyword>
+```
+
 #### The work files field
 
 YAML snippet:
@@ -68,6 +93,20 @@ Filenames:
 ```
 
 For a CSV column with the first row header of "Filenames", and the cell value of "Disseration.pdf|supplemental/table.csv|supplemental/references.txt", the XML metadata will have no change, but three files will be added to the SWORD deposit, based on their relative paths to the current working directory.  A value for the `name` subkey is required, but ignored.
+
+#### A complete mapping to bulkrax
+
+There is a `bulkrax2yaml.py` which will take a Bulkrax Field Mappings JSON file (superadmin -> Accounts -> Edit Account), and will convert it to a YAML configuration file for `csv2hyku.py`.  Manual edits will be needed to add desired `transform` options, such as (notably) "file".
+
+A sample conversion is provided as "bulkrax-mapping.yaml", from the "bulkrax.json" file downloaded from hykucommons.org.  This tool reads from `STDIN` and writes to `STDOUT`.
+
+For compatibility with bulkrax CSVs, you'll almost certainly want to use case insensitive header matching.
+
+#### Other notes
+
+* The XML will be built in order of the column names found in the CSV header
+* Empty values in the CSV will not create empty XML elements
+* There is a command line option if you want the CSV headers to be case insensitive
 
 ## Configuration YAML
 

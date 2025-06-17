@@ -1,0 +1,313 @@
+abstract:
+  name: abstract
+  separator: "|"
+accessibility feature:
+  name: accessibility_feature
+  separator: "|"
+accessibility hazard:
+  name: accessibility_hazard
+  separator: "|"
+accessibility summary:
+  name: accessibility_summary
+accessibility_feature:
+  name: accessibility_feature
+  separator: "|"
+accessibility_hazard:
+  name: accessibility_hazard
+  separator: "|"
+accessibility_summary:
+  name: accessibility_summary
+additional information:
+  name: additional_information
+  separator: "|"
+additional_information:
+  name: additional_information
+  separator: "|"
+admin note:
+  name: admin_note
+admin set id:
+  name: admin_set_id
+admin_note:
+  name: admin_note
+admin_set_id:
+  name: admin_set_id
+alternate version:
+  name: alternate_version
+  separator: "|"
+alternate_version:
+  name: alternate_version
+  separator: "|"
+alternative title:
+  name: alternative_title
+  separator: "|"
+alternative_title:
+  name: alternative_title
+  separator: "|"
+arkivo checksum:
+  name: arkivo_checksum
+  separator: "|"
+arkivo_checksum:
+  name: arkivo_checksum
+  separator: "|"
+audience:
+  name: audience
+  separator: "|"
+author:
+  name: creator
+  separator: "|"
+based near:
+  name: based_near
+  separator: "|"
+bibliographic citation:
+  name: bibliographic_citation
+  separator: "|"
+bibliographic_citation:
+  name: bibliographic_citation
+  separator: "|"
+bulkrax identifier:
+  name: bulkrax_identifier
+children:
+  name: children
+  separator: (?-mix:\s*[;|]\s*)
+chronology note:
+  name: chronology_note
+  separator: "|"
+chronology_note:
+  name: chronology_note
+  separator: "|"
+committee member:
+  name: committee_member
+  separator: "|"
+committee_member:
+  name: committee_member
+  separator: "|"
+contributing library:
+  name: contributing_library
+  separator: "|"
+contributing_library:
+  name: contributing_library
+  separator: "|"
+contributor:
+  name: contributor
+  separator: "|"
+creator:
+  name: creator
+  separator: "|"
+date:
+  name: date
+  separator: "|"
+date created:
+  name: date_created
+  separator: "|"
+date uploaded:
+  name: date_uploaded
+date_created:
+  name: date_created
+  separator: "|"
+date_uploaded:
+  name: date_uploaded
+degree:
+  name: degree_name
+  separator: "|"
+degree discipline:
+  name: degree_discipline
+  separator: "|"
+degree grantor:
+  name: degree_grantor
+  separator: "|"
+degree level:
+  name: degree_level
+  separator: "|"
+degree name:
+  name: degree_name
+  separator: "|"
+depositor:
+  name: depositor
+  separator: "|"
+description:
+  name: description
+  separator: "|"
+discipline:
+  name: discipline
+  separator: "|"
+education level:
+  name: education_level
+  separator: "|"
+education_level:
+  name: education_level
+  separator: "|"
+embargo id:
+  name: embargo_id
+embargo_id:
+  name: embargo_id
+file:
+  name: None
+  separator: "|"
+  transform: "file"
+grantor:
+  name: degree_grantor
+  separator: "|"
+identifier:
+  name: identifier
+  separator: "|"
+import url:
+  name: import_url
+  separator: "|"
+import_url:
+  name: import_url
+  separator: "|"
+item:
+  name: None
+  separator: "|"
+  transform: "file"
+keyword:
+  name: keyword
+  separator: "|"
+label:
+  name: label
+language:
+  name: language
+  separator: "|"
+learning resource type:
+  name: learning_resource_type
+  separator: "|"
+learning_resource_type:
+  name: learning_resource_type
+  separator: "|"
+lease id:
+  name: lease_id
+lease_id:
+  name: lease_id
+level:
+  name: degree_level
+  separator: "|"
+library catalog identifier:
+  name: library_catalog_identifier
+  separator: "|"
+library_catalog_identifier:
+  name: library_catalog_identifier
+  separator: "|"
+license:
+  name: license
+  separator: "|"
+location:
+  name: based_near
+  separator: "|"
+newer version:
+  name: newer_version
+  separator: "|"
+newer_version:
+  name: newer_version
+  separator: "|"
+oer size:
+  name: oer_size
+  separator: "|"
+oer_size:
+  name: oer_size
+  separator: "|"
+on behalf of:
+  name: on_behalf_of
+on_behalf_of:
+  name: on_behalf_of
+owner:
+  name: owner
+parents:
+  name: parents
+  separator: (?-mix:\s*[;|]\s*)
+previous version:
+  name: previous_version
+  separator: "|"
+previous_version:
+  name: previous_version
+  separator: "|"
+proxy depositor:
+  name: proxy_depositor
+proxy_depositor:
+  name: proxy_depositor
+publisher:
+  name: publisher
+  separator: "|"
+related item:
+  name: related_item
+  separator: "|"
+related url:
+  name: related_url
+  separator: "|"
+related_item:
+  name: related_item
+  separator: "|"
+related_url:
+  name: related_url
+  separator: "|"
+relation:
+  name: related_url
+  separator: "|"
+relative path:
+  name: relative_path
+  separator: "|"
+relative_path:
+  name: relative_path
+  separator: "|"
+rendering ids:
+  name: rendering_ids
+  separator: "|"
+rendering_ids:
+  name: rendering_ids
+  separator: "|"
+representative id:
+  name: representative_id
+representative_id:
+  name: representative_id
+resource type:
+  name: resource_type
+  separator: "|"
+rights:
+  name: rights_statement
+  separator: "|"
+rights holder:
+  name: rights_holder
+  separator: "|"
+rights notes:
+  name: rights_notes
+  separator: "|"
+rights statement:
+  name: rights_statement
+  separator: "|"
+rights_holder:
+  name: rights_holder
+  separator: "|"
+rights_notes:
+  name: rights_notes
+  separator: "|"
+rights_statement:
+  name: rights_statement
+  separator: "|"
+source:
+  name: source
+  separator: "|"
+source identifier:
+  name: bulkrax_identifier
+source_identifier:
+  name: bulkrax_identifier
+state:
+  name: state
+subject:
+  name: subject
+  separator: "|"
+table of contents:
+  name: table_of_contents
+  separator: "|"
+table_of_contents:
+  name: table_of_contents
+  separator: "|"
+title:
+  name: title
+  separator: "|"
+type:
+  name: resource_type
+  separator: "|"
+video embed:
+  name: video_embed
+video_embed:
+  name: video_embed
+

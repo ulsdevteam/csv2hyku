@@ -1,0 +1,910 @@
+{
+  "Bulkrax::BagitParser": {
+    "abstract": {
+      "from": [
+        "abstract"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "accessibility_feature": {
+      "from": [
+        "accessibility_feature",
+        "accessibility feature"
+      ],
+      "split": "\\|"
+    },
+    "accessibility_hazard": {
+      "from": [
+        "accessibility_hazard",
+        "accessibility hazard"
+      ],
+      "split": "\\|"
+    },
+    "accessibility_summary": {
+      "from": [
+        "accessibility_summary",
+        "accessibility summary"
+      ]
+    },
+    "additional_information": {
+      "from": [
+        "additional_information",
+        "additional information"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "admin_note": {
+      "from": [
+        "admin_note",
+        "admin note"
+      ]
+    },
+    "admin_set_id": {
+      "from": [
+        "admin_set_id",
+        "admin set id"
+      ],
+      "generated": true
+    },
+    "alternate_version": {
+      "from": [
+        "alternate_version",
+        "alternate version"
+      ],
+      "split": "\\|"
+    },
+    "alternative_title": {
+      "from": [
+        "alternative_title",
+        "alternative title"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "arkivo_checksum": {
+      "from": [
+        "arkivo_checksum",
+        "arkivo checksum"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "audience": {
+      "from": [
+        "audience"
+      ],
+      "split": "\\|"
+    },
+    "based_near": {
+      "from": [
+        "location",
+        "based near"
+      ],
+      "split": "\\|"
+    },
+    "bibliographic_citation": {
+      "from": [
+        "bibliographic_citation",
+        "bibliographic citation"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "bulkrax_identifier": {
+      "from": [
+        "source_identifier",
+        "bulkrax identifier",
+        "source identifier"
+      ],
+      "source_identifier": true,
+      "generated": true,
+      "search_field": "bulkrax_identifier_tesim"
+    },
+    "children": {
+      "from": [
+        "children"
+      ],
+      "split": "(?-mix:\\s*[;|]\\s*)",
+      "related_children_field_mapping": true
+    },
+    "chronology_note": {
+      "from": [
+        "chronology_note",
+        "chronology note"
+      ],
+      "split": "\\|"
+    },
+    "committee_member": {
+      "from": [
+        "committee_member",
+        "committee member"
+      ],
+      "split": "\\|"
+    },
+    "contributing_library": {
+      "from": [
+        "contributing_library",
+        "contributing library"
+      ],
+      "split": "\\|"
+    },
+    "contributor": {
+      "from": [
+        "contributor"
+      ],
+      "split": "\\|"
+    },
+    "creator": {
+      "from": [
+        "author",
+        "creator"
+      ],
+      "split": "\\|"
+    },
+    "date_created": {
+      "from": [
+        "date",
+        "date_created",
+        "date created"
+      ],
+      "split": "\\|"
+    },
+    "date_uploaded": {
+      "from": [
+        "date_uploaded",
+        "date uploaded"
+      ],
+      "generated": true
+    },
+    "date": {
+      "from": [
+        "date"
+      ],
+      "split": "\\|"
+    },
+    "degree_discipline": {
+      "from": [
+        "discipline",
+        "degree discipline"
+      ],
+      "split": "\\|"
+    },
+    "degree_grantor": {
+      "from": [
+        "grantor",
+        "degree grantor"
+      ],
+      "split": "\\|"
+    },
+    "degree_level": {
+      "from": [
+        "level",
+        "degree level"
+      ],
+      "split": "\\|"
+    },
+    "degree_name": {
+      "from": [
+        "degree",
+        "degree name"
+      ],
+      "split": "\\|"
+    },
+    "depositor": {
+      "from": [
+        "depositor"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "description": {
+      "from": [
+        "description"
+      ],
+      "split": "\\|"
+    },
+    "discipline": {
+      "from": [
+        "discipline"
+      ],
+      "split": "\\|"
+    },
+    "education_level": {
+      "from": [
+        "education_level",
+        "education level"
+      ],
+      "split": "\\|"
+    },
+    "embargo_id": {
+      "from": [
+        "embargo_id",
+        "embargo id"
+      ],
+      "generated": true
+    },
+    "file": {
+      "from": [
+        "item",
+        "file"
+      ],
+      "split": "\\|"
+    },
+    "identifier": {
+      "from": [
+        "identifier"
+      ],
+      "split": "\\|"
+    },
+    "import_url": {
+      "from": [
+        "import_url",
+        "import url"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "keyword": {
+      "from": [
+        "keyword"
+      ],
+      "split": "\\|"
+    },
+    "label": {
+      "from": [
+        "label"
+      ],
+      "generated": true
+    },
+    "language": {
+      "from": [
+        "language"
+      ],
+      "split": "\\|"
+    },
+    "learning_resource_type": {
+      "from": [
+        "learning_resource_type",
+        "learning resource type"
+      ],
+      "split": "\\|"
+    },
+    "lease_id": {
+      "from": [
+        "lease_id",
+        "lease id"
+      ],
+      "generated": true
+    },
+    "library_catalog_identifier": {
+      "from": [
+        "library_catalog_identifier",
+        "library catalog identifier"
+      ],
+      "split": "\\|"
+    },
+    "license": {
+      "from": [
+        "license"
+      ],
+      "split": "\\|"
+    },
+    "newer_version": {
+      "from": [
+        "newer_version",
+        "newer version"
+      ],
+      "split": "\\|"
+    },
+    "oer_size": {
+      "from": [
+        "oer_size",
+        "oer size"
+      ],
+      "split": "\\|"
+    },
+    "on_behalf_of": {
+      "from": [
+        "on_behalf_of",
+        "on behalf of"
+      ],
+      "generated": true
+    },
+    "owner": {
+      "from": [
+        "owner"
+      ],
+      "generated": true
+    },
+    "parents": {
+      "from": [
+        "parents"
+      ],
+      "split": "(?-mix:\\s*[;|]\\s*)",
+      "related_parents_field_mapping": true
+    },
+    "previous_version": {
+      "from": [
+        "previous_version",
+        "previous version"
+      ],
+      "split": "\\|"
+    },
+    "proxy_depositor": {
+      "from": [
+        "proxy_depositor",
+        "proxy depositor"
+      ],
+      "generated": true
+    },
+    "publisher": {
+      "from": [
+        "publisher"
+      ],
+      "split": "\\|"
+    },
+    "related_item": {
+      "from": [
+        "related_item",
+        "related item"
+      ],
+      "split": "\\|"
+    },
+    "related_url": {
+      "from": [
+        "related_url",
+        "relation",
+        "related url"
+      ],
+      "split": "\\|"
+    },
+    "relative_path": {
+      "from": [
+        "relative_path",
+        "relative path"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "rendering_ids": {
+      "from": [
+        "rendering_ids",
+        "rendering ids"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "representative_id": {
+      "from": [
+        "representative_id",
+        "representative id"
+      ],
+      "generated": true
+    },
+    "resource_type": {
+      "from": [
+        "type",
+        "resource type"
+      ],
+      "split": "\\|"
+    },
+    "rights_holder": {
+      "from": [
+        "rights_holder",
+        "rights holder"
+      ],
+      "split": "\\|"
+    },
+    "rights_notes": {
+      "from": [
+        "rights_notes",
+        "rights notes"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "rights_statement": {
+      "from": [
+        "rights",
+        "rights_statement",
+        "rights statement"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "source": {
+      "from": [
+        "source"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "state": {
+      "from": [
+        "state"
+      ],
+      "generated": true
+    },
+    "subject": {
+      "from": [
+        "subject"
+      ],
+      "split": "\\|"
+    },
+    "table_of_contents": {
+      "from": [
+        "table_of_contents",
+        "table of contents"
+      ],
+      "split": "\\|"
+    },
+    "title": {
+      "from": [
+        "title"
+      ],
+      "split": "\\|"
+    },
+    "video_embed": {
+      "from": [
+        "video_embed",
+        "video embed"
+      ]
+    }
+  },
+  "Bulkrax::CsvParser": {
+    "abstract": {
+      "from": [
+        "abstract"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "accessibility_feature": {
+      "from": [
+        "accessibility_feature",
+        "accessibility feature"
+      ],
+      "split": "\\|"
+    },
+    "accessibility_hazard": {
+      "from": [
+        "accessibility_hazard",
+        "accessibility hazard"
+      ],
+      "split": "\\|"
+    },
+    "accessibility_summary": {
+      "from": [
+        "accessibility_summary",
+        "accessibility summary"
+      ]
+    },
+    "additional_information": {
+      "from": [
+        "additional_information",
+        "additional information"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "admin_note": {
+      "from": [
+        "admin_note",
+        "admin note"
+      ]
+    },
+    "admin_set_id": {
+      "from": [
+        "admin_set_id",
+        "admin set id"
+      ],
+      "generated": true
+    },
+    "alternate_version": {
+      "from": [
+        "alternate_version",
+        "alternate version"
+      ],
+      "split": "\\|"
+    },
+    "alternative_title": {
+      "from": [
+        "alternative_title",
+        "alternative title"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "arkivo_checksum": {
+      "from": [
+        "arkivo_checksum",
+        "arkivo checksum"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "audience": {
+      "from": [
+        "audience"
+      ],
+      "split": "\\|"
+    },
+    "based_near": {
+      "from": [
+        "location",
+        "based near"
+      ],
+      "split": "\\|"
+    },
+    "bibliographic_citation": {
+      "from": [
+        "bibliographic_citation",
+        "bibliographic citation"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "bulkrax_identifier": {
+      "from": [
+        "source_identifier",
+        "bulkrax identifier",
+        "source identifier"
+      ],
+      "source_identifier": true,
+      "generated": true,
+      "search_field": "bulkrax_identifier_tesim"
+    },
+    "children": {
+      "from": [
+        "children"
+      ],
+      "split": "(?-mix:\\s*[;|]\\s*)",
+      "related_children_field_mapping": true
+    },
+    "chronology_note": {
+      "from": [
+        "chronology_note",
+        "chronology note"
+      ],
+      "split": "\\|"
+    },
+    "committee_member": {
+      "from": [
+        "committee_member",
+        "committee member"
+      ],
+      "split": "\\|"
+    },
+    "contributing_library": {
+      "from": [
+        "contributing_library",
+        "contributing library"
+      ],
+      "split": "\\|"
+    },
+    "contributor": {
+      "from": [
+        "contributor"
+      ],
+      "split": "\\|"
+    },
+    "creator": {
+      "from": [
+        "author",
+        "creator"
+      ],
+      "split": "\\|"
+    },
+    "date_created": {
+      "from": [
+        "date",
+        "date_created",
+        "date created"
+      ],
+      "split": "\\|"
+    },
+    "date_uploaded": {
+      "from": [
+        "date_uploaded",
+        "date uploaded"
+      ],
+      "generated": true
+    },
+    "date": {
+      "from": [
+        "date"
+      ],
+      "split": "\\|"
+    },
+    "degree_discipline": {
+      "from": [
+        "discipline",
+        "degree discipline"
+      ],
+      "split": "\\|"
+    },
+    "degree_grantor": {
+      "from": [
+        "grantor",
+        "degree grantor"
+      ],
+      "split": "\\|"
+    },
+    "degree_level": {
+      "from": [
+        "level",
+        "degree level"
+      ],
+      "split": "\\|"
+    },
+    "degree_name": {
+      "from": [
+        "degree",
+        "degree name"
+      ],
+      "split": "\\|"
+    },
+    "depositor": {
+      "from": [
+        "depositor"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "description": {
+      "from": [
+        "description"
+      ],
+      "split": "\\|"
+    },
+    "discipline": {
+      "from": [
+        "discipline"
+      ],
+      "split": "\\|"
+    },
+    "education_level": {
+      "from": [
+        "education_level",
+        "education level"
+      ],
+      "split": "\\|"
+    },
+    "embargo_id": {
+      "from": [
+        "embargo_id",
+        "embargo id"
+      ],
+      "generated": true
+    },
+    "file": {
+      "from": [
+        "item",
+        "file"
+      ],
+      "split": "\\|"
+    },
+    "identifier": {
+      "from": [
+        "identifier"
+      ],
+      "split": "\\|"
+    },
+    "import_url": {
+      "from": [
+        "import_url",
+        "import url"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "keyword": {
+      "from": [
+        "keyword"
+      ],
+      "split": "\\|"
+    },
+    "label": {
+      "from": [
+        "label"
+      ],
+      "generated": true
+    },
+    "language": {
+      "from": [
+        "language"
+      ],
+      "split": "\\|"
+    },
+    "learning_resource_type": {
+      "from": [
+        "learning_resource_type",
+        "learning resource type"
+      ],
+      "split": "\\|"
+    },
+    "lease_id": {
+      "from": [
+        "lease_id",
+        "lease id"
+      ],
+      "generated": true
+    },
+    "library_catalog_identifier": {
+      "from": [
+        "library_catalog_identifier",
+        "library catalog identifier"
+      ],
+      "split": "\\|"
+    },
+    "license": {
+      "from": [
+        "license"
+      ],
+      "split": "\\|"
+    },
+    "newer_version": {
+      "from": [
+        "newer_version",
+        "newer version"
+      ],
+      "split": "\\|"
+    },
+    "oer_size": {
+      "from": [
+        "oer_size",
+        "oer size"
+      ],
+      "split": "\\|"
+    },
+    "on_behalf_of": {
+      "from": [
+        "on_behalf_of",
+        "on behalf of"
+      ],
+      "generated": true
+    },
+    "owner": {
+      "from": [
+        "owner"
+      ],
+      "generated": true
+    },
+    "parents": {
+      "from": [
+        "parents"
+      ],
+      "split": "(?-mix:\\s*[;|]\\s*)",
+      "related_parents_field_mapping": true
+    },
+    "previous_version": {
+      "from": [
+        "previous_version",
+        "previous version"
+      ],
+      "split": "\\|"
+    },
+    "proxy_depositor": {
+      "from": [
+        "proxy_depositor",
+        "proxy depositor"
+      ],
+      "generated": true
+    },
+    "publisher": {
+      "from": [
+        "publisher"
+      ],
+      "split": "\\|"
+    },
+    "related_item": {
+      "from": [
+        "related_item",
+        "related item"
+      ],
+      "split": "\\|"
+    },
+    "related_url": {
+      "from": [
+        "related_url",
+        "relation",
+        "related url"
+      ],
+      "split": "\\|"
+    },
+    "relative_path": {
+      "from": [
+        "relative_path",
+        "relative path"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "rendering_ids": {
+      "from": [
+        "rendering_ids",
+        "rendering ids"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "representative_id": {
+      "from": [
+        "representative_id",
+        "representative id"
+      ],
+      "generated": true
+    },
+    "resource_type": {
+      "from": [
+        "type",
+        "resource type"
+      ],
+      "split": "\\|"
+    },
+    "rights_holder": {
+      "from": [
+        "rights_holder",
+        "rights holder"
+      ],
+      "split": "\\|"
+    },
+    "rights_notes": {
+      "from": [
+        "rights_notes",
+        "rights notes"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "rights_statement": {
+      "from": [
+        "rights",
+        "rights_statement",
+        "rights statement"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "source": {
+      "from": [
+        "source"
+      ],
+      "split": "\\|",
+      "generated": true
+    },
+    "state": {
+      "from": [
+        "state"
+      ],
+      "generated": true
+    },
+    "subject": {
+      "from": [
+        "subject"
+      ],
+      "split": "\\|"
+    },
+    "table_of_contents": {
+      "from": [
+        "table_of_contents",
+        "table of contents"
+      ],
+      "split": "\\|"
+    },
+    "title": {
+      "from": [
+        "title"
+      ],
+      "split": "\\|"
+    },
+    "video_embed": {
+      "from": [
+        "video_embed",
+        "video embed"
+      ]
+    }
+  }
+}
