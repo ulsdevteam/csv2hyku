@@ -57,6 +57,7 @@ def write_element(parent, element_name, value, transform, target_dir):
     # Special transformation: treat the value as a filename and copy it to the target_dir
     # No element will be created
     if transform == 'file':
+        logging.debug(f"File lookup: {value}")
         try:
             if value:
                 shutil.copy(value, os.path.join(target_dir, os.path.basename(value)))
@@ -71,7 +72,7 @@ def write_element(parent, element_name, value, transform, target_dir):
         logging.warning(f"Unknown transform {transform}")
 
     # Don't write empty elements
-    if !value:
+    if not value:
         return
 
     # Append the new element to the parent with the new value
@@ -105,6 +106,12 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
     # Load YAML configuration
     with open(yaml_file, 'r') as yf:
         config = yaml.safe_load(yf)
+
+    if ignore_case:
+        ciconfig = {}
+        for key in config:
+           ciconfig[key.lower()] = config[key]
+        config = ciconfig
 
     # Ensure output directory exists
     if os.path.isdir(output_dir):
@@ -145,17 +152,18 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                             write_element(root, xml_element_name, val, transform, row_output_dir)
                     else:
                         write_element(root, xml_element_name, value, transform, row_output_dir)
-                # Ignore headers not in config
-
-            # Check for headers in YAML config that are not in CSV
-            for yaml_header in config:
-                if yaml_header not in headers:
-                    logging.debug(f"Mapping for header '{yaml_header}' found in YAML configuration but not in CSV.")
+                elif row_number == 1:
+                    logging.info(f"Header '{header}' is not mapped")
 
             # Write XML to file
             tree = ET.ElementTree(root)
             xml_filename = os.path.join(row_output_dir, f"metadata.xml")
             tree.write(xml_filename, encoding='utf-8', xml_declaration=True)
+
+        # Check for headers in YAML config that are not in CSV
+        for yaml_header in config:
+            if yaml_header not in headers:
+                logging.info(f"Mapping for header '{yaml_header}' found in YAML mapping but not in CSV.")
 
 def main():
     # Command line arguments
