@@ -16,12 +16,13 @@ def main():
     # read STDIN as JSON
     bulkrax = json.load(sys.stdin)
     # fields are Hyku data elements
-    for field in bulkrax['Bulkrax::BagitParser']:
+    root_element = 'Bulkrax::BagitParser'
+    for field in bulkrax[root_element]:
         # aliases are the possible column headers to name this element in the Bulkrax CSV
-        for alias in bulkrax['Bulkrax::BagitParser'][field]['from']:
+        for alias in bulkrax[root_element][field]['from']:
             # split maps directly to our separator
-            if bulkrax['Bulkrax::BagitParser'][field].get('split'):
-                mapping[alias] = { "name": field, "separator": bulkrax['Bulkrax::BagitParser'][field].get('split') }
+            if bulkrax[root_element][field].get('split'):
+                mapping[alias] = { "name": field, "separator": bulkrax[root_element][field].get('split') }
             else:
                 mapping[alias] = { "name": field }
     # print with block indentation

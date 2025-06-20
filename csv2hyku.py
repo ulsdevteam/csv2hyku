@@ -118,13 +118,26 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
         logging.info(f"The output directory already exists: {output_dir}")
     os.makedirs(output_dir, exist_ok=True)
 
+    # We'll support UTF-8, but need to check if there is a byte-order-marker
+    file_encoding = 'utf-8'
+    f = open(csv_file, 'r', newline='', encoding='utf-8')
+    first_line = f.read()
+    if first_line.startswith('\ufeff'):
+        file_encoding = 'utf-8-sig'
+    f.close()
+
     # Read CSV file
-    with open(csv_file, 'r', newline='', encoding='utf-8') as cf:
+    with open(csv_file, 'r', newline='', encoding=file_encoding) as cf:
         if ignore_case:
             reader = IgnoreCaseDictReader(cf)
         else:
             reader = csv.DictReader(cf)
         headers = reader.fieldnames
+
+        # Check for headers in the CSV not in the YAML mapping
+        for header in headers:
+            if not header in config:
+                logging.info(f"Header '{header}' is not mapped")
 
         for row_number, row in enumerate(reader, start=1):
             logging.debug(f"Begin CSV row {row_number}")
@@ -152,15 +165,13 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                             write_element(root, xml_element_name, val, transform, row_output_dir)
                     else:
                         write_element(root, xml_element_name, value, transform, row_output_dir)
-                elif row_number == 1:
-                    logging.info(f"Header '{header}' is not mapped")
 
             # Write XML to file
             tree = ET.ElementTree(root)
             xml_filename = os.path.join(row_output_dir, f"metadata.xml")
             tree.write(xml_filename, encoding='utf-8', xml_declaration=True)
 
-        # Check for headers in YAML config that are not in CSV
+        # Check for headers in YAML mapping that are not in CSV
         for yaml_header in config:
             if yaml_header not in headers:
                 logging.info(f"Mapping for header '{yaml_header}' found in YAML mapping but not in CSV.")

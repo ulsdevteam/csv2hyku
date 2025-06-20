@@ -7,7 +7,7 @@ Given a CSV file with metadata, and optional works files to deposit, create SWOR
 * Python 3
 * dependencies via requirements.txt
 * a YAML mapping file describing the CSV
-* A CSV with one row per Work, columns with the metadata
+* A CSV with one row per Work, columns with the metadata, encoded in UTF-8
 * a configuration YAML describing the Hyku 6+ tenant and credentials
 
 ## YAML mapping
