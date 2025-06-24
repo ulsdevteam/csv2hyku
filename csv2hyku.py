@@ -6,8 +6,33 @@ import logging
 import argparse
 import shutil
 
-# Set up logging
-logging.basicConfig(level=logging.WARNING, format='%(levelname)s: %(message)s')
+class IgnoreCaseDictReader(csv.DictReader):
+    """
+    Override DictReader to ignore the case of column headers
+    """
+
+    @property
+    def fieldnames(self):
+        """
+        fieldnames property is lowecase of each DictReader fieldname
+        """
+        return [field.lower() for field in csv.DictReader.fieldnames.fget(self)]
+    def next(self):
+        """
+        next() returns next, but lowecase
+        """
+        return IgnoreCaseDict(csv.DictReader.next(self))
+
+class IgnoreCaseDict(dict):
+    """
+    Override dict to ignore the case of key
+    """
+
+    def __getItem__(self, key):
+        """
+        getItem returns getitem, but lowercase
+        """
+        return dict.__getitem__(self, key.lower())
 
 def write_element(parent, element_name, value, transform, target_dir):
     """
@@ -18,7 +43,7 @@ def write_element(parent, element_name, value, transform, target_dir):
       element_name (str): the name of the new element
       value (str): the value of the new element
       transform (str): a transformation to apply to the element value
-      target_dir: a working context directory, if file ops are needed for the transform
+      target_dir (str): a working context directory, if file ops are needed for the transform
 
     Return:
       None
@@ -32,8 +57,10 @@ def write_element(parent, element_name, value, transform, target_dir):
     # Special transformation: treat the value as a filename and copy it to the target_dir
     # No element will be created
     if transform == 'file':
+        logging.debug(f"File lookup: {value}")
         try:
-            shutil.copy(value, os.path.join(target_dir, os.path.basename(value)))
+            if value:
+                shutil.copy(value, os.path.join(target_dir, os.path.basename(value)))
         except FileNotFoundError as e:
             logging.error(f"File not found: {value}")
         return
@@ -44,11 +71,15 @@ def write_element(parent, element_name, value, transform, target_dir):
     elif transform != None:
         logging.warning(f"Unknown transform {transform}")
 
+    # Don't write empty elements
+    if not value:
+        return
+
     # Append the new element to the parent with the new value
     element = ET.SubElement(parent, element_name)
     element.text = value
 
-def csv_to_xml(csv_file, yaml_file, output_dir, verbose=False):
+def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
     """
     Transform a CSV file row by row to a Hyku SWORD deposit (XML + files)
 
@@ -56,7 +87,7 @@ def csv_to_xml(csv_file, yaml_file, output_dir, verbose=False):
       csv_file (str): filename for the CSV input
       yaml_file (str): filename for the YAML configuration
       output_dir (str): where to write the resulting XML + files
-      verbose (bool): Will add debugging logging
+      ignore_case (bool): Will use case insensitive CSV headers
 
     Return:
       None
@@ -76,20 +107,45 @@ def csv_to_xml(csv_file, yaml_file, output_dir, verbose=False):
     with open(yaml_file, 'r') as yf:
         config = yaml.safe_load(yf)
 
+    if ignore_case:
+        ciconfig = {}
+        for key in config:
+           ciconfig[key.lower()] = config[key]
+        config = ciconfig
+
     # Ensure output directory exists
+    if os.path.isdir(output_dir):
+        logging.info(f"The output directory already exists: {output_dir}")
     os.makedirs(output_dir, exist_ok=True)
 
+    # We'll support UTF-8, but need to check if there is a byte-order-marker
+    file_encoding = 'utf-8'
+    f = open(csv_file, 'r', newline='', encoding='utf-8')
+    first_line = f.read()
+    if first_line.startswith('\ufeff'):
+        file_encoding = 'utf-8-sig'
+    f.close()
+
     # Read CSV file
-    with open(csv_file, 'r', newline='', encoding='utf-8') as cf:
-        reader = csv.DictReader(cf)
+    with open(csv_file, 'r', newline='', encoding=file_encoding) as cf:
+        if ignore_case:
+            reader = IgnoreCaseDictReader(cf)
+        else:
+            reader = csv.DictReader(cf)
         headers = reader.fieldnames
 
-        for row_number, row in enumerate(reader, start=1):
-            if verbose:
-                logging.warning(f"Begin CSV row {row_number}")
+        # Check for headers in the CSV not in the YAML mapping
+        for header in headers:
+            if not header in config:
+                logging.info(f"Header '{header}' is not mapped")
 
-            # Ensure output directory exists
+        for row_number, row in enumerate(reader, start=1):
+            logging.debug(f"Begin CSV row {row_number}")
+
+            # Ensure output subdirectory exists
             row_output_dir = os.path.join(output_dir, f"row_{row_number}")
+            if os.path.isdir(row_output_dir) and len(os.listdir(row_output_dir)) != 0:
+                logging.warning(f"The row directory exists and was not empty: {row_output_dir}")
             os.makedirs(row_output_dir, exist_ok=True)
 
             # Create XML root element
@@ -109,18 +165,16 @@ def csv_to_xml(csv_file, yaml_file, output_dir, verbose=False):
                             write_element(root, xml_element_name, val, transform, row_output_dir)
                     else:
                         write_element(root, xml_element_name, value, transform, row_output_dir)
-                # Ignore headers not in config
-
-            # Check for headers in YAML config that are not in CSV
-            if verbose:
-                for yaml_header in config:
-                    if yaml_header not in headers:
-                        logging.warning(f"Mapping for header '{yaml_header}' found in YAML configuration but not in CSV.")
 
             # Write XML to file
             tree = ET.ElementTree(root)
             xml_filename = os.path.join(row_output_dir, f"metadata.xml")
             tree.write(xml_filename, encoding='utf-8', xml_declaration=True)
+
+        # Check for headers in YAML mapping that are not in CSV
+        for yaml_header in config:
+            if yaml_header not in headers:
+                logging.info(f"Mapping for header '{yaml_header}' found in YAML mapping but not in CSV.")
 
 def main():
     # Command line arguments
@@ -130,10 +184,15 @@ def main():
     parser.add_argument('--mapping', required=True, type=str, help='The YAML configuation file')
     parser.add_argument('--input', required=True, type=str, help='The input CSV file')
     parser.add_argument('--output', required=True, type=str, help='The output directory')
-    parser.add_argument('--verbose', action='store_true')
+    parser.add_argument('--ignore-case', action='store_true')
+    parser.add_argument('--loglevel', help='The log level', choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'], default='ERROR')
     args = parser.parse_args()
+
+    # Set up logging
+    logging.basicConfig(level=getattr(logging, args.loglevel), format='%(levelname)s: %(message)s')
+
     # read the CSV input, the YAML config, and write to the output directory
-    csv_to_xml(args.input, args.mapping, args.output, args.verbose)
+    csv_to_xml(args.input, args.mapping, args.output, args.ignore_case)
     exit() 
 
 if __name__ == "__main__":

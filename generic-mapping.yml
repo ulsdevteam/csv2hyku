@@ -10,13 +10,13 @@ Abstract:
   name: 'abstract'
 Date:
   name: 'date'
-Visibility:
+visibility:
   name: 'visiblity'
-Eembargo Release Date:
+embargo_release_date:
   name: 'embargo_release_date'
-Visibility During Embargo:
+visibility_during_embargo:
   name: 'visibility_during_embargo'
-Visibility After Embargo:
+visibility_after_embargo:
   name: 'visibility_after_embargo'
 Subject:
   name: 'subject'
@@ -28,6 +28,7 @@ Committee Members:
   transform: 'strip'
 Language:
   name: 'language'
-Filename:
+File Path:
   name: 'file'
+  separator: ';'
   transform: 'file'
