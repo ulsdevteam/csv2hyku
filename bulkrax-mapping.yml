@@ -68,7 +68,7 @@ bulkrax identifier:
   name: bulkrax_identifier
 children:
   name: children
-  separator: (?-mix:\s*[;|]\s*)
+  separator: "|"
 chronology note:
   name: chronology_note
   separator: "|"
@@ -213,7 +213,7 @@ owner:
   name: owner
 parents:
   name: parents
-  separator: (?-mix:\s*[;|]\s*)
+  separator: "|"
 previous version:
   name: previous_version
   separator: "|"

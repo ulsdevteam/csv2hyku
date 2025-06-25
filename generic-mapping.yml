@@ -11,7 +11,7 @@ Abstract:
 Date:
   name: 'date'
 visibility:
-  name: 'visiblity'
+  name: 'visibility'
 embargo_release_date:
   name: 'embargo_release_date'
 visibility_during_embargo:
@@ -32,3 +32,8 @@ File Path:
   name: 'file'
   separator: ';'
   transform: 'file'
+resource_type:
+  name: resource_type
+  separator: ';'
+rights_statement:
+  name: rights_statement

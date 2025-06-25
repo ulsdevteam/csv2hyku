@@ -171,6 +171,10 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
             xml_filename = os.path.join(row_output_dir, f"metadata.xml")
             tree.write(xml_filename, encoding='utf-8', xml_declaration=True)
 
+            # create a zipfile
+            zipfile = os.path.join(output_dir, f"row_{row_number}")
+            shutil.make_archive(zipfile, 'zip', row_output_dir)
+
         # Check for headers in YAML mapping that are not in CSV
         for yaml_header in config:
             if yaml_header not in headers:
@@ -181,7 +185,7 @@ def main():
     parser = argparse.ArgumentParser(
         prog='csv2hyku',
         description='Transform a CSV into Hyku SWORD deposit files')
-    parser.add_argument('--mapping', required=True, type=str, help='The YAML configuation file')
+    parser.add_argument('--mapping', required=True, type=str, help='The YAML mapping file')
     parser.add_argument('--input', required=True, type=str, help='The input CSV file')
     parser.add_argument('--output', required=True, type=str, help='The output directory')
     parser.add_argument('--ignore-case', action='store_true')
