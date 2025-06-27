@@ -142,7 +142,7 @@ In this example, you have the `csv2hyku` application under your home directory, 
 ```
 cp bulkrax-mapping.yml columns.yml
 vi columns.yml
-cp sword-config.yml secrets.yml
+cp hyku-sword.yml.sample secrets.yml
 vi secrets.yml
 cd /data/bulkrax
 python3 ~/csv2hyku/csv2hyku.py --input=generics.csv --output=zipfiles --mapping=~/csv2hyku/columns.yml --ignore-case
