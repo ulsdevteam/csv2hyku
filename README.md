@@ -96,7 +96,7 @@ For a CSV column with the first row header of "Filenames", and the cell value of
 
 #### A complete mapping to bulkrax
 
-There is a `bulkrax2yaml.py` which will take a Bulkrax Field Mappings JSON file (superadmin -> Accounts -> Edit Account), and will convert it to a YAML configuration file for `csv2hyku.py`.  Manual edits will be needed to add desired `transform` options, such as (notably) "file".
+There is a `bulkrax2yaml.py` which will take a Bulkrax Field Mappings JSON file (superadmin -> Accounts -> Edit Account), and will convert it to a YAML configuration file for `csv2hyku.py`.  Manual edits will be needed to add desired `transform` options, such as (notably) "file".  Bulkrax also allows for flexible separators, such as `(?-mix:\s*[;|]\s*)`, which will need to be simplified to just the single separator you are actually using in the data.
 
 A sample conversion is provided as "bulkrax-mapping.yaml", from the "bulkrax.json" file downloaded from hykucommons.org.  This tool reads from `STDIN` and writes to `STDOUT`.
 
@@ -110,14 +110,44 @@ For compatibility with bulkrax CSVs, you'll almost certainly want to use case in
 
 ## Configuration YAML
 
-The Configuration YAML include keys for:
+The Configuration YAML includes keys for:
 * sword_baseurl: What is the base URL to your Hyku tenant?
+* collection: What is the admin set into which we are depositing?
 * api_key: What is the API key for your deposit user?
 * work_type: What is the Hyku work model to submit as an HTTP header?
 
+See `hyku-sword.yml.sample` for an example.
+
 ## Usage
 
-`python3 csv2hyku.py -h` for inline help
+The process has two steps:
+* `csv2hyku.py` takes in a CSV file and creates a directory of .zip files in SimpleZip format.
+* `swordsend.py` takes in a directory of .zip files and POSTs them to the SWORD endpoint
+
+`python3 csv2hyku.py -h` and `python3 swordsend.py -h` for inline help
+
+### Quickstart
+
+* Copy the `generic-mapping.yml` or `bulkrax-mapping.yml` to your own `mapping.yml` file
+* Align the keys of the `mapping.yml` file to your CSV
+* Copy the `hyku-sword.yml.sample` to your own `sword-config.yml` file
+* Edit the `sword-config.yml` file values to match your Hyku tenant
+* Run `csv2hyku.py`, specifying the `mapping.yml` file, your CSV, and the output directory to write the zip files
+* Run `swordsend.py`, specifying the `sword-config.yml` file and the directory where you wrote the zip files
+
+### Example
+
+In this example, you have the `csv2hyku` application under your home directory, and in `/data/bulkrax` you have a bulkrax CSV and deposit files refernced by relative paths.  Set up the configuration for mapping and Hyku access, then switch to the bulkrax directory (so the relative paths work), and reference the applications and configs in the arguments.
+
+```
+cp bulkrax-mapping.yml columns.yml
+vi columns.yml
+cp hyku-sword.yml.sample secrets.yml
+vi secrets.yml
+cd /data/bulkrax
+python3 ~/csv2hyku/csv2hyku.py --input=generics.csv --output=zipfiles --mapping=~/csv2hyku/columns.yml --ignore-case
+python3 ~/csv2hyku/swordsend.py --input=zipfiles --config=~csv2hyku/secrets.yml
+```
 
 ## License
 
