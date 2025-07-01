@@ -140,7 +140,7 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                         mapname = transform.split(':', 1)[1]
                         if not rewrite.get(mapname):
                             # Check for absolute or relative path from working dir, then check for relative path from the YAML config
-                            for name in [os.path.isfile(mapname), os.path.isfile(os.path.join(os.path.dirname(yaml_file), os.path.mapname))]:
+                            for name in [mapname, os.path.join(os.path.dirname(yaml_file), os.path.mapname)]:
                                 if os.path.isfile(name):
                                     with open(name, 'r') as mf:
                                         rewrite[mapname] = yaml.safe_load(mf)

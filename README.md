@@ -120,7 +120,7 @@ See `hyku-sword.yml.sample` for an example.
 
 ## CSV value rewriting
 
-If your CSV has values which do not directly map to input values for SWORD, there is a `transform` operation available called "rewrite" which will read a YAML file to replace input values with output values.  This is useful, for example, if processing a Bulkrax CSV where the `parents` field references bulkrax collection identifiers rather than Hyku identifiers.  The "rewrite" operation consists of the string-literal "rewrite:" followed by path to the YAML key-value file.  The path will be interpreted as abolute, relative to the working directory, or relative to the YAML mapping file, in that order.
+If your CSV has values which do not directly map to input values for SWORD, there is a `transform` operation available called "rewrite" which will read a YAML file to replace input values with output values.  This is useful, for example, if processing a Bulkrax CSV where the `parents` field references bulkrax collection identifiers rather than Hyku identifiers.  The "rewrite" operation consists of the string-literal "rewrite:" followed by path to the YAML key-value file.  The path will be interpreted as abolute, relative to the working directory, or relative to the YAML mapping file, in that order.  The rewrite key-value pairs need not be comprehensive; an unrecognized value will be passed through untouched.
 
 ### Example
 YAML mapping:
@@ -140,13 +140,14 @@ grain_collection: 91eccf5b-5d44-4e1f-9ae3-c04fb29887a5
 
 CSV `parents` column:
 ```
-fruit_colleciton|vegetable_collections
+fruit_colleciton|vegetable_collections|seed_collection
 ```
 
 XML output:
 ```
 <member_of_collection_ids>f5a892b4-7ec7-4090-8f43-7a491d5d5484</member_of_collection_ids>
 <member_of_collection_ids>7e6f9ba6-dc96-4625-9d7e-46e893a8b164</member_of_collection_ids>
+<member_of_collection_ids>seed_collection</member_of_collection_ids>
 ```
 
 ### creating the YAML rewrite file for collections
