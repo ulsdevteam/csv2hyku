@@ -5,34 +5,10 @@ import xml.etree.ElementTree as ET
 import logging
 import argparse
 import shutil
+import utilityfunctions
+from utilityfunctions import *
 
-class IgnoreCaseDictReader(csv.DictReader):
-    """
-    Override DictReader to ignore the case of column headers
-    """
-
-    @property
-    def fieldnames(self):
-        """
-        fieldnames property is lowecase of each DictReader fieldname
-        """
-        return [field.lower() for field in csv.DictReader.fieldnames.fget(self)]
-    def next(self):
-        """
-        next() returns next, but lowecase
-        """
-        return IgnoreCaseDict(csv.DictReader.next(self))
-
-class IgnoreCaseDict(dict):
-    """
-    Override dict to ignore the case of key
-    """
-
-    def __getItem__(self, key):
-        """
-        getItem returns getitem, but lowercase
-        """
-        return dict.__getitem__(self, key.lower())
+rewrite = {}
 
 def write_element(parent, element_name, value, transform, target_dir):
     """
@@ -68,6 +44,10 @@ def write_element(parent, element_name, value, transform, target_dir):
     # General transformations
     if transform == 'strip':
         value = value.strip()
+    elif transform.startswith('rewrite:'):
+        mapname = transform.split(':', 1)[1]
+        if rewrite.get(mapname):
+            value = rewrite[mapname].get(value)
     elif transform != None:
         logging.warning(f"Unknown transform {transform}")
 
@@ -103,6 +83,8 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
       transform: an operation to perform on the individual values (see: write_element)
     """
 
+    global rewrite
+
     # Load YAML configuration
     with open(yaml_file, 'r') as yf:
         config = yaml.safe_load(yf)
@@ -118,13 +100,7 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
         logging.info(f"The output directory already exists: {output_dir}")
     os.makedirs(output_dir, exist_ok=True)
 
-    # We'll support UTF-8, but need to check if there is a byte-order-marker
-    file_encoding = 'utf-8'
-    f = open(csv_file, 'r', newline='', encoding='utf-8')
-    first_line = f.read()
-    if first_line.startswith('\ufeff'):
-        file_encoding = 'utf-8-sig'
-    f.close()
+    file_encoding = utilityfunctions.check_utf8_sign(csv_file)
 
     # Read CSV file
     with open(csv_file, 'r', newline='', encoding=file_encoding) as cf:
@@ -158,6 +134,17 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                     xml_element_name = config[header]['name']
                     separator = config[header].get('separator')
                     transform = config[header].get('transform')
+
+                    # we'll cache rewrite files here, as we can check both the current working directory and the config path
+                    if transform.startswith('rewrite:')
+                        mapname = transform.split(':', 1)[1]
+                        if not rewrite.get(mapname):
+                            # Check for absolute or relative path from working dir, then check for relative path from the YAML config
+                            for name in [os.path.isfile(mapname), os.path.isfile(os.path.join(os.path.dirname(yaml_file), os.path.mapname))]:
+                                if os.path.isfile(name):
+                                    with open(name, 'r') as mf:
+                                        rewrite[mapname] = yaml.safe_load(mf)
+                                    break
 
                     if separator and separator in value:
                         values = value.split(separator)
