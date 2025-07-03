@@ -8,6 +8,7 @@ import shutil
 import utilityfunctions
 from utilityfunctions import *
 
+# Globally cache any rewrite mappings. Top level key is the filename, then second level key is the search, and value is the replacement.
 rewrite = {}
 
 def write_element(parent, element_name, value, transform, target_dir):
@@ -140,7 +141,7 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                         mapname = transform.split(':', 1)[1]
                         if not rewrite.get(mapname):
                             # Check for absolute or relative path from working dir, then check for relative path from the YAML config
-                            for name in [mapname, os.path.join(os.path.dirname(yaml_file), os.path.mapname)]:
+                            for name in [mapname, os.path.join(os.path.dirname(yaml_file), mapname)]:
                                 if os.path.isfile(name):
                                     with open(name, 'r') as mf:
                                         rewrite[mapname] = yaml.safe_load(mf)

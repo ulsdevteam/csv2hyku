@@ -120,7 +120,7 @@ See `hyku-sword.yml.sample` for an example.
 
 ## CSV value rewriting
 
-If your CSV has values which do not directly map to input values for SWORD, there is a `transform` operation available called "rewrite" which will read a YAML file to replace input values with output values.  This is useful, for example, if processing a Bulkrax CSV where the `parents` field references bulkrax collection identifiers rather than Hyku identifiers.  The "rewrite" operation consists of the string-literal "rewrite:" followed by path to the YAML key-value file.  The path will be interpreted as abolute, relative to the working directory, or relative to the YAML mapping file, in that order.  The rewrite key-value pairs need not be comprehensive; an unrecognized value will be passed through untouched.
+If your CSV has values which do not directly map to input values for SWORD, there is a `transform` operation available called "rewrite" which will read a YAML file to replace input values with output values.  This is useful, for example, if processing a Bulkrax CSV where the `parents` field references bulkrax collection identifiers rather than Hyku identifiers.  The "rewrite" operation consists of the string-literal "rewrite:" followed by path to the YAML key-value file.  The path will be interpreted as absolute, relative to the working directory, or relative to the YAML mapping file, in that order.  The rewrite key-value pairs need not be comprehensive; an unrecognized value will be passed through untouched.
 
 ### Example
 YAML mapping:
@@ -140,7 +140,7 @@ grain_collection: 91eccf5b-5d44-4e1f-9ae3-c04fb29887a5
 
 CSV `parents` column:
 ```
-fruit_colleciton|vegetable_collections|seed_collection
+fruit_collection|vegetable_collection|seed_collection
 ```
 
 XML output:
@@ -152,7 +152,7 @@ XML output:
 
 ### creating the YAML rewrite file for collections
 
-If you have the bulkrax file used to ingest the new collections, a script is provided to read the collection name and bulkrax identifier column, look up the collection list in SWORD, and match the collections base on names.  This assumes unique collection names, and assumes that your bulkrax collections CSV has the identifer in `source_identifier` and the name in `title`.  It will also require a SWORD configuration YAML as input.  The rewrite YAML will be written to STDOUT; warnings about duplicate titles and unrecognized collections will be written to STDERR.
+If you have the bulkrax file used to ingest the new collections, a script is provided to read the collection name and bulkrax identifier column, look up the collection list in SWORD, and match the collections based on names.  This assumes unique collection names, and assumes that your bulkrax collections CSV has the identifer in `source_identifier` and the name in `title`.  It will also require a SWORD configuration YAML as input.  The rewrite YAML will be written to STDOUT; warnings about duplicate titles and unrecognized collections will be written to STDERR.
 
 ```
 python3 rewritecollections.py --config=sword-credentials.yml --csv=collections.csv > collections.yml
