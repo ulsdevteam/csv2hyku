@@ -212,8 +212,9 @@ on_behalf_of:
 owner:
   name: owner
 parents:
-  name: parents
+  name: member_of_collection_ids
   separator: "|"
+  transform: "rewrite:collections.yaml"
 previous version:
   name: previous_version
   separator: "|"
