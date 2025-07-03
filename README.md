@@ -18,6 +18,7 @@ The YAML mapping is in the form of a key representing the CSV column header, map
 * transform: a processer name used to process the cell values
   * 'file': treat this value as a filename, copy the file to the deposit
   * 'strip': trim leading and trailing whitespace from the value
+  * 'rewrite:...': use an external YAML file for key-value pair replacement
 
 ### Examples:
 
@@ -178,7 +179,7 @@ The process has two steps:
 
 ### Example
 
-In this example, you have the `csv2hyku` application under your home directory, and in `/data/bulkrax` you have a bulkrax CSV and deposit files refernced by relative paths.  Set up the configuration for mapping and Hyku access, then switch to the bulkrax directory (so the relative paths work), and reference the applications and configs in the arguments.
+In this example, you have the `csv2hyku` application under your home directory, and in `/data/bulkrax` you have a bulkrax CSV (generics.csv) and deposit files referenced by relative paths.  You also have the original bulkrax CSV used to create the collections in the tenant (collections.csv).  Set up the configuration for mapping and Hyku access, then switch to the bulkrax directory (so the relative paths work), and reference the applications and configs in the arguments.
 
 ```
 cp bulkrax-mapping.yml columns.yml
@@ -186,8 +187,9 @@ vi columns.yml
 cp hyku-sword.yml.sample secrets.yml
 vi secrets.yml
 cd /data/bulkrax
+python3 ~/csv2hyku/rewritecollections.py --config=~/csv2hyku/secrets.yml --csv=collections.csv > collections.yml
 python3 ~/csv2hyku/csv2hyku.py --input=generics.csv --output=zipfiles --mapping=~/csv2hyku/columns.yml --ignore-case
-python3 ~/csv2hyku/swordsend.py --input=zipfiles --config=~csv2hyku/secrets.yml
+python3 ~/csv2hyku/swordsend.py --input=zipfiles --config=~/csv2hyku/secrets.yml
 ```
 
 ## License
