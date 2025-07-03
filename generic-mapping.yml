@@ -22,6 +22,7 @@ Subject:
   name: 'subject'
 Collection (GUID):
   name: 'member_of_collection_ids'
+  transform: 'rewrite:collections.yaml'
 Committee Members:
   name: 'committee'
   separator: ';'

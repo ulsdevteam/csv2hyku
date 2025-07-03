@@ -45,7 +45,7 @@ def write_element(parent, element_name, value, transform, target_dir):
     # General transformations
     if transform == 'strip':
         value = value.strip()
-    elif transform.startswith('rewrite:'):
+    elif transform and transform.startswith('rewrite:'):
         mapname = transform.split(':', 1)[1]
         if rewrite.get(mapname):
             value = rewrite[mapname].get(value)
@@ -137,12 +137,15 @@ def csv_to_xml(csv_file, yaml_file, output_dir, ignore_case=False):
                     transform = config[header].get('transform')
 
                     # we'll cache rewrite files here, as we can check both the current working directory and the config path
-                    if transform.startswith('rewrite:')
+                    if transform and transform.startswith('rewrite:') and not rewrite.get('mapname'):
                         mapname = transform.split(':', 1)[1]
                         if not rewrite.get(mapname):
+                            logging.info(f"rewrite {mapname} found")
                             # Check for absolute or relative path from working dir, then check for relative path from the YAML config
                             for name in [mapname, os.path.join(os.path.dirname(yaml_file), mapname)]:
+                                logging.debug(f"checking for path {name}")
                                 if os.path.isfile(name):
+                                    logging.info(f"Caching {name} as rewrite {mapname}")
                                     with open(name, 'r') as mf:
                                         rewrite[mapname] = yaml.safe_load(mf)
                                     break
